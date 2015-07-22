@@ -1,0 +1,30 @@
+<!DOCTYPE html> 
+<html lang="en" ng-app="MainApp"> 
+  <head> 
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="//openlayers.org/en/v3.7.0/css/ol.css"> 
+    <link rel="stylesheet" href="css/main.css"> 
+    <title>OSM</title> 
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <meta name="viewport" content="initial-scale=1" />
+  </head> 
+
+  <body layout="column" ng-controller="MainController">
+
+    <md-toolbar layout="row">
+      <div class="md-toolbar-tools">
+        <h1>OpenStreetMap</h1>   
+        <span flex></span>
+        <div class="md-avatar">
+          <!--  -->    
+        </div>
+      </div>
+    </md-toolbar>
+    <div osm-map lat="-7.1194165" lng="-34.856898" xf="64"></div>
+
+    <script src="//openlayers.org/en/v3.7.0/build/ol.js"></script>
+    <script src="js/lib/lib.js"></script>
+    <script src="js/osmmapview.js"></script>
+  </body>
+</html>
