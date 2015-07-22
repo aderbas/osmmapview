@@ -10,8 +10,9 @@ function MapService($rootScope){
   return {
       setMap: setM,
       setVectorLayer: putVectorLayer,
+      center: mapCenter,
       vector:{
-          add: addVector
+        add: addVector
       }
   };
   // set map
@@ -28,5 +29,12 @@ function MapService($rootScope){
   // add vector
   function addVector(obj){
      vectorLayer.addVector(obj);             
+  }
+  // get / set center
+  function mapCenter(lng,lat){
+    if(lng && lat){
+      map.getView().setCenter(ol.proj.transform([lng, lat], 'EPSG:4326', 'EPSG:3857'));
+    }
+    return map.getView().getCenter();
   }
 }
