@@ -1,6 +1,6 @@
 // Gruntfile
 
-var path_prefix = '/var/www/osm/';
+var path_prefix = '';
 
 var global = {
   less:{
