@@ -29,8 +29,9 @@ function OpenStreetMap(){
         xf = attrs.xf && parseInt(attrs.xf) || 0,
         map, maplayer;
       // create map layer
+      // Layer. Possible values are osm, sat, and hyb.
       maplayer = new ol.layer.Tile({
-        source: new ol.source.OSM()
+        source: new ol.source.MapQuest({layer: 'osm'}) // or ol.source.OSM
       });
       // create map
       map = new ol.Map({
@@ -42,8 +43,18 @@ function OpenStreetMap(){
          })
       });// map
       elem[0].style.height = ctrl.getHeight(xf);
+      // maplayer.on('postcompose', function(event) {
+      //   var context = event.context;
+      //   var canvas = context.canvas;
+      //   var image = context.getImageData(0, 0, canvas.width, canvas.height);
+      //   var data = image.data;
+      //   for (var i = 0, ii = data.length; i < ii; i += 4) {
+      //     data[i] = data[i + 1] = data[i + 2] = (3 * data[i] + 4 * data[i + 1] + data[i + 2]) / 8;
+      //   }
+      //   context.putImageData(image, 0, 0);
+      // });        
       // register vector layer
-      ctrl.registerVLayer(new VectorLayerHelper());                
+      ctrl.registerVLayer(new VectorLayerHelper()); // _helper.js                
       // register map
       ctrl.registerMap(map);
     }// link
