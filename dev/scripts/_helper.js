@@ -33,3 +33,41 @@ function VectorLayerHelper(){
     addVector: addnew
   };                
 }// VectorLayerHelper
+
+function LMarkerHelper(map){
+  var listpoint = [], listpoly = [], _map = map;
+  // add point
+  function addPoint(point, options){
+    var m = L.marker(point, options).addTo(_map);
+    if(options.content){
+        m.bindPopup(options.content);
+    }
+    return m;
+  }
+  // remove point
+  function removePoint(options){
+    //
+  }
+  // add polyline
+  function addPolyline(path, options){
+    return L.polyline(path, {
+        color: options.color || 'blue'
+    }).addTo(_map);
+  }
+  // remove polyline
+  function removePolyline(options){
+    //
+  }
+  return {
+    point: {
+      list: listpoint,
+      add: addPoint,
+      remove: removePoint
+    },
+    polyline: {
+      list: listpoly,
+      add: addPolyline,
+      remove: removePolyline                   
+    }
+  };
+}

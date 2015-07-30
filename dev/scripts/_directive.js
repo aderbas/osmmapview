@@ -2,7 +2,50 @@
 
 angular
   .module('MainApp')
-  .directive('osmMap', OpenStreetMap);
+  .directive('osmMap', OpenStreetMap)
+  .directive('leafOmsMap', LOpenStreetMap);
+
+// leafjs http://leafletjs.com/ v.0.7.3
+function LOpenStreetMap(){
+  return {
+    restrict: 'EA',
+    controller: function($scope, $location, $leafService, $window){ 
+      // register map
+      this.registerMap = function(map){
+        $leafService.setMap(map);  
+      };
+      // register vector layer
+      this.registerVLayer = function(vl){
+        $leafService.setVectorLayer(vl);   
+      };
+      // height
+      this.getHeight = function(xf){
+        return ($window.innerHeight - xf)+'px';
+      };      
+    }, // controller 
+    link: function (scope, elem, attrs, ctrl){
+      var 
+        lat           = attrs.lat && parseFloat(attrs.lat) || -7.1194165,
+        lng           = attrs.lng && parseFloat(attrs.lng) || -34.856898,
+        xf            = attrs.xf && parseInt(attrs.xf) || 0,
+        contributors  = '<a href="http://www.mapquest.com/">MapQuest</a>&mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+        tileSource    = 'http://otile4.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
+        map; 
+      // create map
+      map = L.map(elem[0]).setView([lat, lng], 12);
+      // add layer
+      L.tileLayer(tileSource, {
+        attribution: contributors
+      }).addTo(map);
+      // height
+      elem[0].style.height = ctrl.getHeight(xf);     
+      // register map
+      ctrl.registerMap(map); 
+      // invalidade map
+      map.invalidateSize();
+    }   
+  }; // return
+} // LOpenStreetMap 
 
 // directive setup
 function OpenStreetMap(){
@@ -24,9 +67,9 @@ function OpenStreetMap(){
     }, // controller
     link: function (scope, elem, attrs, ctrl){
       var 
-        lat = attrs.lat && parseFloat(attrs.lat) || -7.1194165,
-        lng = attrs.lng && parseFloat(attrs.lng) || -34.856898,
-        xf = attrs.xf && parseInt(attrs.xf) || 0,
+        lat   = attrs.lat && parseFloat(attrs.lat) || -7.1194165,
+        lng   = attrs.lng && parseFloat(attrs.lng) || -34.856898,
+        xf    = attrs.xf && parseInt(attrs.xf) || 0,
         map, maplayer;
       // create map layer
       // Layer. Possible values are osm, sat, and hyb.

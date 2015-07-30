@@ -2,7 +2,8 @@
 
 angular
   .module('MainApp')
-  .service('$mapService', ['$rootScope', MapService]);
+  .service('$mapService', ['$rootScope', MapService])
+  .service('$leafService', ['$rootScope', LService]);
 
 // map service
 function MapService($rootScope){
@@ -36,5 +37,31 @@ function MapService($rootScope){
       map.getView().setCenter(ol.proj.transform([lng, lat], 'EPSG:4326', 'EPSG:3857'));
     }
     return map.getView().getCenter();
+  }
+}
+
+// map using leafjs http://leafletjs.com/ v.0.7.3
+function LService($rootScope){
+  var map, mHelper;
+  return {
+    setMap: setM,
+    overlay: overlayHelper,
+    center: setCenter
+  };
+  // set map
+  function setM(m){
+    map = m;
+    mHelper = new LMarkerHelper(map);
+    $rootScope.$broadcast('mapReady', map);
+    return map;
+  }
+  // set helper
+  function overlayHelper(){
+    return mHelper;
+  }
+  // set center
+  function setCenter(latLng, zoom){
+    map.panTo(latLng);
+    map.setZoom(zoom||14);
   }
 }
