@@ -9,27 +9,27 @@ angular
 function MapService($rootScope){
   var map, vectorLayer;
   return {
-      setMap: setM,
-      setVectorLayer: putVectorLayer,
-      center: mapCenter,
-      vector:{
-        add: addVector
-      }
+    setMap: setM,
+    setVectorLayer: putVectorLayer,
+    center: mapCenter,
+    vector:{
+      add: addVector
+    }
   };
   // set map
   function setM(m){
-      map = m;
-      map.addLayer(vectorLayer.layer);
-      $rootScope.$broadcast('mapReady', map);
-      return map;
+    map = m;
+    map.addLayer(vectorLayer.layer);
+    $rootScope.$broadcast('mapReady', map);
+    return map;
   }
   // set vector layer
   function putVectorLayer(l){
-      vectorLayer = l;
+    vectorLayer = l;
   }
   // add vector
   function addVector(obj){
-     vectorLayer.addVector(obj);             
+    vectorLayer.addVector(obj);             
   }
   // get / set center
   function mapCenter(lng,lat){

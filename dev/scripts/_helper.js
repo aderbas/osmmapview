@@ -40,7 +40,7 @@ function LMarkerHelper(map){
   function addPoint(point, options){
     var m = L.marker(point, options).addTo(_map);
     if(options.content){
-        m.bindPopup(options.content);
+      m.bindPopup(options.content);
     }
     return m;
   }

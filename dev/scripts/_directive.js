@@ -14,10 +14,6 @@ function LOpenStreetMap(){
       this.registerMap = function(map){
         $leafService.setMap(map);  
       };
-      // register vector layer
-      this.registerVLayer = function(vl){
-        $leafService.setVectorLayer(vl);   
-      };
       // height
       this.getHeight = function(xf){
         return ($window.innerHeight - xf)+'px';
