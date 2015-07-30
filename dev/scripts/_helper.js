@@ -42,6 +42,8 @@ function LMarkerHelper(map){
     if(options.content){
       m.bindPopup(options.content);
     }
+    //m.valueOf()._icon.style.fill = 'green';
+    //console.log(m.valueOf()._icon.style);
     return m;
   }
   // remove point
