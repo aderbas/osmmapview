@@ -51,7 +51,7 @@ function LMarkerHelper(map){
   // add polyline
   function addPolyline(path, options){
     return L.polyline(path, {
-        color: options.color || 'blue'
+      color: options.color || 'blue'
     }).addTo(_map);
   }
   // remove polyline
