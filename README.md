@@ -3,7 +3,7 @@ Basic Open Street Map Directive
 
 <div class="highlight highlight-javascript">
 <pre>
--- install nodejs
+-- usage
 $ npm install
 $ bower install
 $ grunt build
